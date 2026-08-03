@@ -1,58 +1,79 @@
 * {
     margin: 0;
     padding: 0;
-}
-
-.cabecalho {
-    padding: 15px 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #7e3e1c;
-}
-
-.cartao {
-    width: 260px;
-    height: 200px;
-}
-
-.cartao-imagem {
-    width: 100%;
+    box-sizing: border-box; /* Evita que padding quebre o tamanho dos elementos */
 }
 
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f5f2f2;
+    background-color: #0b0c10; /* Fundo "Dark Mode" Gamer */
+    font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
-main {
-    flex: 1;
+/* --- Cabeçalho --- */
+.cabecalho {
+    padding: 15px 25px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    background-color: #1f2833; /* Cinza azulado tecnológico */
+    border-bottom: 3px solid #66fcf1; /* Detalhe em ciano neon */
+}
+
+h1 {
+    color: #66fcf1; /* Texto em ciano neon */
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .cabecalho-link {
     color: #fff;
     text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
-h1 {
-    color: #fff;
-    font-size: 24px;
+.cabecalho-link:hover {
+    color: #66fcf1;
 }
 
-footer {
-    background-color: #7e3e1c;
-    padding: 15px 25px;
+/* --- Conteúdo Principal --- */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+h2 {
     color: #fff;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+section {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap; /* Permite que os cards quebrem de linha em telas menores */
+    justify-content: center;
+}
+
+/* --- Mecânica de Flashcard 3D --- */
+.cartao {
+    width: 280px;
+    height: 380px; /* Aumentado para acomodar imagem + texto sem transbordar */
+    perspective: 1000px; /* Crucial para o efeito de profundidade 3D do flashcard */
 }
 
 .cartao-interno {
+    width: 100%;
+    height: 100%;
     position: relative;
-    transition: transform 0.8s;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Transição mais suave */
     transform-style: preserve-3d;
 }
 
@@ -61,17 +82,68 @@ footer {
 }
 
 .cartao-frente, .cartao-verso {
-    position: absolute;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    position: absolute; /* Sobrepõe perfeitamente a frente e o verso */
+    top: 0;
+    left: 0;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    backface-visibility: hidden; /* Esconde o texto invertido atrás do card */
+    background-color: #1f2833;
+    border: 2px solid #45a29e;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .cartao-verso {
-    transform: rotateY(180deg);
+    transform: rotateY(180deg); /* Define a orientação inicial do verso */
+    background-color: #0b0c10;
+    border-color: #66fcf1; /* Borda neon diferente para o verso */
 }
 
-section {
+/* --- Conteúdo Interno dos Flashcards --- */
+.cartao-imagem {
+    width: 100%;
+    height: 180px;
+    object-fit: cover; /* Garante que a imagem se ajuste sem distorcer */
+    border-bottom: 2px solid #45a29e;
+}
+
+.cartao-verso .cartao-imagem {
+    border-bottom: 2px solid #66fcf1;
+}
+
+p {
+    padding: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: center;
+    color: #c5c6c7;
+    flex: 1;
     display: flex;
-    gap: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Classes específicas para os textos do HTML anterior */
+.mito {
+    color: #ff4d4d; /* Vermelho vibrante para o mito */
+    font-weight: bold;
+}
+
+.verdade {
+    color: #2ecc71; /* Verde vibrante para a verdade */
+    font-weight: bold;
+}
+
+/* --- Rodapé --- */
+footer {
+    background-color: #1f2833;
+    padding: 15px 25px;
+    color: #c5c6c7;
+    text-align: center;
+    font-size: 14px;
+    border-top: 1px solid #45a29e;
 }
