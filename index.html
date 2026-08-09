@@ -3,16 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estilos.css" />
-    <title>GG ou Fake?</title>
+    <title>GG ou Fake? Curiosidades Gamer</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #1a1a2e;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Cabeçalho */
+        header.cabecalho {
+            background-color: #16213e;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #e94560;
+        }
+
+        header h1 {
+            color: #e94560;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #e94560;
+        }
+
+        /* Conteúdo Principal */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: #f0f0f0;
+        }
+
+        /* Grid de Cartões */
+        .container-cartoes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        /* Estrutura do Cartão (Flip Effect) */
+        .cartao {
+            background-color: transparent;
+            perspective: 1000px; /* Necessário para o efeito 3D */
+            height: 350px; /* Altura fixa para uniformidade */
+            cursor: pointer;
+        }
+
+        .cartao-interno {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border-radius: 15px;
+        }
+
+        /* Gira o cartão quando passa o mouse */
+        .cartao:hover .cartao-interno {
+            transform: rotateY(180deg);
+        }
+
+        /* Frente e Verso comuns */
+        .cartao-frente, .cartao-verso {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        /* Estilo da Frente */
+        .cartao-frente {
+            background-color: #0f3460;
+            color: white;
+            border: 2px solid #16213e;
+        }
+
+        .cartao-frente img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(233, 69, 96, 0.5));
+        }
+
+        .mito {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        /* Estilo do Verso */
+        .cartao-verso {
+            background-color: #e94560;
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .cartao-verso img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .verdade {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .tag {
+            background: rgba(0,0,0,0.3);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #16213e;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Imagens de exemplo (placeholders) */
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 <body>
 
     <header class="cabecalho">
         <h1>GG ou Fake?</h1>
         <nav>
-            <a href="#" class="cabecalho-link">Início</a>
-            <a href="#" class="cabecalho-link">Placar</a>
+            <a href="#">Início</a>
+            <a href="#">Placar</a>
         </nav>
     </header>
 
@@ -25,12 +195,15 @@
             <article class="cartao">
                 <div class="cartao-interno">
                     <div class="cartao-frente">
-                        <img src="https://unsplash.com" alt="Controle de videogame" class="cartao-imagem">
-                        <p class="mito">Mito: O Minecraft foi criado por uma equipe de 500 desenvolvedores desde o primeiro dia!</p>
+                        <!-- Usando emoji como ícone para não depender de links externos quebrados -->
+                        <div class="game-icon">⛏️</div>
+                        <span class="tag">Mito Comum</span>
+                        <p class="mito">"O Minecraft foi criado por uma equipe de 500 desenvolvedores!"</p>
                     </div>
                     <div class="cartao-verso">
-                        <img src="https://unsplash.com" alt="Controle de videogame" class="cartao-imagem">
-                        <p class="verdade">Fato: Markus "Notch" Persson criou a primeira versão do jogo sozinho em apenas 6 dias!</p>
+                        <div class="game-icon">👨‍💻</div>
+                        <span class="tag">Verdade</span>
+                        <p class="verdade">Markus "Notch" Persson criou a primeira versão sozinho em apenas <strong>6 dias</strong> em 2009!</p>
                     </div>
                 </div>
             </article>
@@ -39,12 +212,46 @@
             <article class="cartao">
                 <div class="cartao-interno">
                     <div class="cartao-frente">
-                        <img src="https://unsplash.com" alt="Consoles antigos" class="cartao-imagem">
-                        <p class="mito">Mito: O Mario quebra os blocos clássicos do jogo usando a cabeça!</p>
+                        <div class="game-icon">🍄</div>
+                        <span class="tag">Mito Clássico</span>
+                        <p class="mito">"Mario quebra os blocos batendo a cabeça neles!"</p>
                     </div>
                     <div class="cartao-verso">
-                        <img src="https://unsplash.com" alt="Consoles antigos" class="cartao-imagem">
-                        <p class="verdade">Fato: Arte oficial e pixels provam que ele quebra os blocos com o punho erguido!</p>
+                        <div class="game-icon">🥊</div>
+                        <span class="tag">Verdade</span>
+                        <p class="verdade">A arte oficial mostra que ele usa o <strong>punho</strong> para quebrar os blocos!</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Cartão 3: Pac-Man -->
+            <article class="cartao">
+                <div class="cartao-interno">
+                    <div class="cartao-frente">
+                        <div class="game-icon">👻</div>
+                        <span class="tag">Mito</span>
+                        <p class="mito">"O nome Pac-Man vem de 'Puck Man' (o puck do hóquei)!"</p>
+                    </div>
+                    <div class="cartao-verso">
+                        <div class="game-icon">🍕</div>
+                        <span class="tag">Verdade</span>
+                        <p class="verdade">Vem da palavra japonesa <em>"Paku-Paku"</em>, que descreve o som de mastigar!</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Cartão 4: GTA -->
+            <article class="cartao">
+                <div class="cartao-interno">
+                    <div class="cartao-frente">
+                        <div class="game-icon">🚓</div>
+                        <span class="tag">Mito</span>
+                        <p class="mito">"GTA é baseado apenas em Los Angeles!"</p>
+                    </div>
+                    <div class="cartao-verso">
+                        <div class="game-icon">🌆</div>
+                        <span class="tag">Verdade</span>
+                        <p class="verdade">Cada cidade mistura várias cidades reais. Los Santos (GTA V) é uma mistura de <strong>Los Angeles com San Francisco</strong>!</p>
                     </div>
                 </div>
             </article>
@@ -53,7 +260,7 @@
     </main>
 
     <footer>
-        <p>Projeto Player 1 desenvolvido por Moni</p>
+        <p>Projeto Player 1 desenvolvido por Moni | 2026</p>
     </footer>
 
 </body>
