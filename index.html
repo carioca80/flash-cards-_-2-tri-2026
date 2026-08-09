@@ -17,6 +17,9 @@
             background-color: #1a1a2e;
             color: #fff;
             line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* Cabeçalho */
@@ -27,6 +30,9 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 3px solid #e94560;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         header h1 {
@@ -34,6 +40,7 @@
             font-size: 1.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
+            text-shadow: 2px 2px 0px #000;
         }
 
         nav a {
@@ -42,10 +49,13 @@
             margin-left: 20px;
             font-weight: bold;
             transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
         }
 
         nav a:hover {
-            color: #e94560;
+            color: #1a1a2e;
+            background-color: #e94560;
         }
 
         /* Conteúdo Principal */
@@ -54,12 +64,18 @@
             margin: 0 auto;
             padding: 40px 20px;
             text-align: center;
+            flex: 1; /* Empurra o rodapé para baixo se houver pouco conteúdo */
         }
 
         h2 {
             margin-bottom: 40px;
             font-size: 2rem;
             color: #f0f0f0;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        h2 span {
+            color: #e94560;
         }
 
         /* Grid de Cartões */
@@ -73,8 +89,8 @@
         /* Estrutura do Cartão (Flip Effect) */
         .cartao {
             background-color: transparent;
-            perspective: 1000px; /* Necessário para o efeito 3D */
-            height: 350px; /* Altura fixa para uniformidade */
+            perspective: 1000px;
+            height: 380px; /* Altura ajustada para mais texto */
             cursor: pointer;
         }
 
@@ -85,11 +101,10 @@
             text-align: center;
             transition: transform 0.8s;
             transform-style: preserve-3d;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
             border-radius: 15px;
         }
 
-        /* Gira o cartão quando passa o mouse */
         .cartao:hover .cartao-interno {
             transform: rotateY(180deg);
         }
@@ -99,80 +114,106 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            -webkit-backface-visibility: hidden; /* Safari */
+            -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             border-radius: 15px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 25px;
             overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Estilo da Frente */
         .cartao-frente {
-            background-color: #0f3460;
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
             color: white;
-            border: 2px solid #16213e;
         }
 
-        .cartao-frente img {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
+        .cartao-frente::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at center, rgba(233, 69, 96, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .game-icon {
+            font-size: 4rem;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(233, 69, 96, 0.5));
+            filter: drop-shadow(0 0 15px rgba(233, 69, 96, 0.6));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .tag {
+            background: rgba(233, 69, 96, 0.2);
+            border: 1px solid #e94560;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #e94560;
+            font-weight: bold;
         }
 
         .mito {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: bold;
-            color: #ff6b6b;
+            color: #fff;
+            line-height: 1.4;
         }
 
         /* Estilo do Verso */
         .cartao-verso {
-            background-color: #e94560;
+            background: linear-gradient(135deg, #e94560 0%, #c02744 100%);
             color: white;
             transform: rotateY(180deg);
         }
 
-        .cartao-verso img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            margin-bottom: 15px;
+        .tag-verdade {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid #fff;
+            color: #fff;
         }
 
         .verdade {
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 500;
+            line-height: 1.5;
         }
 
-        .tag {
-            background: rgba(0,0,0,0.3);
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
+        .verdade strong {
+            color: #ffeb3b; /* Amarelo para destaque */
         }
 
         /* Rodapé */
         footer {
             background-color: #16213e;
             text-align: center;
-            padding: 20px;
-            margin-top: 50px;
-            color: #888;
-            font-size: 0.9rem;
+            padding: 30px 20px;
+            margin-top: auto;
+            border-top: 3px solid #e94560;
+            color: #aaa;
+            font-size: 0.95rem;
         }
 
-        /* Imagens de exemplo (placeholders) */
-        .game-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
+        footer p {
+            margin-bottom: 5px;
+        }
+
+        footer .credits {
+            color: #e94560;
+            font-weight: bold;
+            font-size: 1.1rem;
         }
     </style>
 </head>
@@ -187,7 +228,7 @@
     </header>
 
     <main>
-        <h2>Mitos do Mundo Gamer: Passe o mouse para revelar a verdade!</h2>
+        <h2>Mitos do Mundo Gamer: <span>Passe o mouse</span> para revelar a verdade!</h2>
         
         <section class="container-cartoes">
             
@@ -195,14 +236,13 @@
             <article class="cartao">
                 <div class="cartao-interno">
                     <div class="cartao-frente">
-                        <!-- Usando emoji como ícone para não depender de links externos quebrados -->
                         <div class="game-icon">⛏️</div>
                         <span class="tag">Mito Comum</span>
                         <p class="mito">"O Minecraft foi criado por uma equipe de 500 desenvolvedores!"</p>
                     </div>
                     <div class="cartao-verso">
                         <div class="game-icon">👨‍💻</div>
-                        <span class="tag">Verdade</span>
+                        <span class="tag tag-verdade">Verdade</span>
                         <p class="verdade">Markus "Notch" Persson criou a primeira versão sozinho em apenas <strong>6 dias</strong> em 2009!</p>
                     </div>
                 </div>
@@ -218,7 +258,7 @@
                     </div>
                     <div class="cartao-verso">
                         <div class="game-icon">🥊</div>
-                        <span class="tag">Verdade</span>
+                        <span class="tag tag-verdade">Verdade</span>
                         <p class="verdade">A arte oficial mostra que ele usa o <strong>punho</strong> para quebrar os blocos!</p>
                     </div>
                 </div>
@@ -234,8 +274,8 @@
                     </div>
                     <div class="cartao-verso">
                         <div class="game-icon">🍕</div>
-                        <span class="tag">Verdade</span>
-                        <p class="verdade">Vem da palavra japonesa <em>"Paku-Paku"</em>, que descreve o som de mastigar!</p>
+                        <span class="tag tag-verdade">Verdade</span>
+                        <p class="verdade">Vem da palavra japonesa <em>"Paku-Paku"</em>, que descreve o som de mastigar aberturas!</p>
                     </div>
                 </div>
             </article>
@@ -250,8 +290,72 @@
                     </div>
                     <div class="cartao-verso">
                         <div class="game-icon">🌆</div>
-                        <span class="tag">Verdade</span>
-                        <p class="verdade">Cada cidade mistura várias cidades reais. Los Santos (GTA V) é uma mistura de <strong>Los Angeles com San Francisco</strong>!</p>
+                        <span class="tag tag-verdade">Verdade</span>
+                        <p class="verdade">Los Santos (GTA V) é uma mistura de <strong>Los Angeles com San Francisco</strong> (Vice City é Miami)!</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Cartão 5: Sonic -->
+            <article class="cartao">
+                <div class="cartao-interno">
+                    <div class="cartao-frente">
+                        <div class="game-icon">⚡</div>
+                        <span class="tag">Mito</span>
+                        <p class="mito">"Sonic foi criado para ser mais rápido que o Mario!"</p>
+                    </div>
+                    <div class="cartao-verso">
+                        <div class="game-icon">🦔</div>
+                        <span class="tag tag-verdade">Verdade</span>
+                        <p class="verdade">Ele foi criado para ser a **mascote da Sega** e ter uma atitude "cool" contra o Mario!</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Cartão 6: Tetris -->
+            <article class="cartao">
+                <div class="cartao-interno">
+                    <div class="cartao-frente">
+                        <div class="game-icon">🧱</div>
+                        <span class="tag">Mito</span>
+                        <p class="mito">"Tetris foi criado nos Estados Unidos!"</p>
+                    </div>
+                    <div class="cartao-verso">
+                        <div class="game-icon">🇷🇺</div>
+                        <span class="tag tag-verdade">Verdade</span>
+                        <p class="verdade">Foi criado por Alexey Pajitnov na **União Soviética** em 1984, no centro de computação!</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Cartão 7: The Last of Us -->
+            <article class="cartao">
+                <div class="cartao-interno">
+                    <div class="cartao-frente">
+                        <div class="game-icon">🍄</div>
+                        <span class="tag">Mito</span>
+                        <p class="mito">"Os infectados são apenas zumbis comuns!"</p>
+                    </div>
+                    <div class="cartao-verso">
+                        <div class="game-icon">🦠</div>
+                        <span class="tag tag-verdade">Verdade</span>
+                        <p class="verdade">Eles são baseados no **fungo Cordyceps**, que existe na natureza e controla insetos!</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Cartão 8: Pokemon -->
+            <article class="cartao">
+                <div class="cartao-interno">
+                    <div class="cartao-frente">
+                        <div class="game-icon">🔴</div>
+                        <span class="tag">Mito</span>
+                        <p class="mito">"Pikachu foi o primeiro Pokémon escolhido!"</p>
+                    </div>
+                    <div class="cartao-verso">
+                        <div class="game-icon">🐭</div>
+                        <span class="tag tag-verdade">Verdade</span>
+                        <p class="verdade">O designer preferia o **Eevee** ou o **Gengar**, mas Pikachu foi escolhido por ser mais fofo!</p>
                     </div>
                 </div>
             </article>
@@ -260,7 +364,8 @@
     </main>
 
     <footer>
-        <p>Projeto Player 1 desenvolvido por Moni | 2026</p>
+        <p>Desenvolvido com 💜 por <span class="credits">Ismael</span></p>
+        <p>&copy; 2026 GG ou Fake? - Todos os direitos reservados</p>
     </footer>
 
 </body>
