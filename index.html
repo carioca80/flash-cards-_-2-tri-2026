@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GG ou Fake? | O Portal das Curiosidades Gamer</title>
     <style>
-        /* --- Variáveis de Cores e Reset --- */
+        /* --- Variáveis e Reset --- */
         :root {
             --bg-dark: #0f0e17;
             --bg-card: #232230;
@@ -23,7 +23,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: var(--font-main);
-            scroll-behavior: smooth;
+            scroll-behavior: smooth; /* Rolagem suave nativa */
         }
 
         body {
@@ -35,7 +35,7 @@
             min-height: 100vh;
         }
 
-        /* --- Cabeçalho e Navegação --- */
+        /* --- Cabeçalho --- */
         header {
             background-color: rgba(15, 14, 23, 0.95);
             padding: 1rem 5%;
@@ -55,16 +55,15 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--text-main);
+            cursor: pointer;
         }
 
-        .logo span {
-            color: var(--accent);
-        }
+        .logo span { color: var(--accent); }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: 25px;
         }
 
         nav a {
@@ -74,11 +73,10 @@
             font-size: 1rem;
             transition: color 0.3s;
             position: relative;
+            cursor: pointer;
         }
 
-        nav a:hover {
-            color: var(--primary);
-        }
+        nav a:hover { color: var(--primary); }
 
         nav a::after {
             content: '';
@@ -91,53 +89,55 @@
             transition: width 0.3s;
         }
 
-        nav a:hover::after {
-            width: 100%;
-        }
+        nav a:hover::after { width: 100%; }
 
-        /* --- Hero Section (Intro) --- */
+        /* --- Hero Section --- */
         .hero {
             text-align: center;
-            padding: 80px 20px;
+            padding: 100px 20px;
             background: linear-gradient(180deg, var(--bg-dark) 0%, #1a1a2e 100%);
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
             background: linear-gradient(to right, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(229, 49, 112, 0.3);
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--text-muted);
             max-width: 700px;
-            margin: 0 auto 30px;
+            margin: 0 auto 40px;
         }
 
         .btn-cta {
             display: inline-block;
-            padding: 12px 30px;
+            padding: 15px 40px;
             background-color: var(--accent);
             color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
             border: none;
             cursor: pointer;
+            box-shadow: 0 0 20px rgba(229, 49, 112, 0.4);
         }
 
         .btn-cta:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(229, 49, 112, 0.4);
+            background-color: #ff4d94;
+            box-shadow: 0 10px 25px rgba(229, 49, 112, 0.6);
         }
 
         /* --- Seções Gerais --- */
         section {
-            padding: 60px 5%;
+            padding: 80px 5%;
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -145,20 +145,21 @@
         .section-title {
             text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             position: relative;
             display: inline-block;
             left: 50%;
             transform: translateX(-50%);
+            color: var(--text-main);
         }
 
         .section-title::after {
             content: '';
             display: block;
-            width: 60px;
+            width: 80px;
             height: 4px;
             background-color: var(--primary);
-            margin: 10px auto 0;
+            margin: 15px auto 0;
             border-radius: 2px;
         }
 
@@ -168,78 +169,82 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 30px;
-            text-align: center;
         }
 
         .step {
             flex: 1;
-            min-width: 250px;
+            min-width: 280px;
             background: var(--bg-card);
-            padding: 30px;
-            border-radius: 15px;
+            padding: 40px 30px;
+            border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            transition: transform 0.3s;
         }
 
-        .step-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
+        .step:hover { transform: translateY(-10px); }
 
-        .step h3 {
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
+        .step-icon { font-size: 3.5rem; margin-bottom: 20px; }
+        .step h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.4rem; }
+        .step p { color: var(--text-muted); }
 
-        /* --- Guinness World Records Section --- */
+        /* --- Guinness Grid --- */
         .guinness-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
         }
 
         .record-card {
             background: linear-gradient(145deg, #2a2a35, #1e1e25);
-            padding: 25px;
-            border-radius: 12px;
+            padding: 30px;
+            border-radius: 15px;
             border-left: 5px solid var(--primary);
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .record-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
         .record-year {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255,255,255,0.1);
-            padding: 5px 10px;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 137, 6, 0.15);
+            padding: 5px 12px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: bold;
             color: var(--primary);
+            border: 1px solid rgba(255, 137, 6, 0.3);
         }
 
         .record-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: var(--text-main);
+            line-height: 1.3;
         }
 
         .record-desc {
             font-size: 0.95rem;
             color: var(--text-muted);
+            margin-bottom: 15px;
         }
 
         .record-game {
-            margin-top: 15px;
+            display: inline-block;
+            background: rgba(229, 49, 112, 0.2);
+            padding: 4px 10px;
+            border-radius: 6px;
             font-weight: bold;
             color: var(--accent);
-            font-style: italic;
+            font-size: 0.9rem;
         }
 
         /* --- Flashcards (Curiosidades) --- */
@@ -248,13 +253,15 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
             perspective: 1000px;
+            margin-top: 20px;
         }
 
         .flip-card {
             background-color: transparent;
             width: 100%;
-            height: 380px;
+            height: 400px; /* Altura fixa */
             cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .flip-card-inner {
@@ -262,12 +269,14 @@
             width: 100%;
             height: 100%;
             text-align: center;
-            transition: transform 0.8s;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efeito elástico */
             transform-style: preserve-3d;
             box-shadow: var(--shadow);
             border-radius: 20px;
         }
 
+        /* Classe para ativar o giro via JS (mobile) ou hover (desktop) */
+        .flip-card.is-flipped .flip-card-inner,
         .flip-card:hover .flip-card-inner {
             transform: rotateY(180deg);
         }
@@ -283,8 +292,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 25px;
+            padding: 30px;
             border: 2px solid rgba(255,255,255,0.1);
+            user-select: none;
         }
 
         /* Frente */
@@ -294,103 +304,108 @@
         }
 
         .game-emoji {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px var(--accent));
+            font-size: 4.5rem;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 15px var(--accent));
             animation: float 3s ease-in-out infinite;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-15px); }
         }
 
         .question-tag {
-            background: rgba(255, 137, 6, 0.2);
+            background: rgba(255, 137, 6, 0.15);
             border: 1px solid var(--primary);
             color: var(--primary);
-            padding: 5px 15px;
-            border-radius: 20px;
+            padding: 6px 18px;
+            border-radius: 25px;
             text-transform: uppercase;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-bottom: 15px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
         }
 
         .question-text {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
             line-height: 1.4;
         }
 
         /* Verso */
         .flip-card-back {
-            background: linear-gradient(135deg, var(--accent) 0%, #c02744 100%);
+            background: linear-gradient(135deg, var(--accent) 0%, #9c1c36 100%);
             color: white;
             transform: rotateY(180deg);
         }
 
         .answer-tag {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.25);
             border: 1px solid white;
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
+            padding: 6px 18px;
+            border-radius: 25px;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
         }
 
         .answer-text {
             font-size: 1.1rem;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .answer-text strong {
             color: #fff;
             background: rgba(255,255,255,0.2);
-            padding: 0 5px;
+            padding: 0 6px;
             border-radius: 4px;
+            font-weight: 800;
         }
 
         /* --- Rodapé --- */
         footer {
             background-color: #0a0a10;
-            padding: 50px 20px;
+            padding: 60px 20px;
             margin-top: auto;
             border-top: 2px solid var(--accent);
             text-align: center;
         }
 
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
         .footer-logo {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.8rem;
+            font-weight: 800;
             color: var(--text-main);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
         }
 
         .footer-logo span { color: var(--accent); }
 
         .credits {
-            margin-top: 20px;
+            margin-top: 25px;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 25px;
+            display: inline-block;
         }
 
         .credits strong {
             color: var(--primary);
             font-size: 1.1rem;
+            font-weight: 800;
         }
 
         /* Responsividade */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            nav { display: none; } /* Em um site real, adicionar menu hambúrguer */
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            nav { display: none; } /* Menu simplificado para mobile */
             .cards-container { grid-template-columns: 1fr; }
+            .step { min-width: 100%; }
         }
     </style>
 </head>
@@ -398,7 +413,7 @@
 
     <!-- Cabeçalho -->
     <header>
-        <div class="logo">GG <span>ou Fake?</span></div>
+        <div class="logo" onclick="window.scrollTo(0,0)">GG <span>ou Fake?</span></div>
         <nav>
             <ul>
                 <li><a href="#inicio">Início</a></li>
@@ -419,35 +434,4 @@
     <!-- Como Funciona -->
     <section id="como-funciona">
         <h2 class="section-title">Como Funciona?</h2>
-        <div class="how-it-works">
-            <div class="step">
-                <div class="step-icon">🤔</div>
-                <h3>1. Leia o Mito</h3>
-                <p>Cada cartão apresenta uma afirmação comum sobre jogos que você pode ter ouvido por aí.</p>
-            </div>
-            <div class="step">
-                <div class="step-icon">🖱️</div>
-                <h3>2. Passe o Mouse</h3>
-                <p>Interaja com os cartões! Passe o mouse (ou toque no celular) para girar a carta.</p>
-            </div>
-            <div class="step">
-                <div class="step-icon">✅</div>
-                <h3>3. Revele a Verdade</h3>
-                <p>Descubra se é "GG" (Verdade) ou "Fake" (Mito) e leia o fato histórico real.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Guinness World Records Section -->
-    <section id="guinness">
-        <h2 class="section-title">🏆 Salão da Fama: Guinness World Records</h2>
-        <p style="text-align: center; margin-bottom: 40px; color: var(--text-muted);">
-            Confira alguns dos maiores recordes oficialmente certificados no Livro Guinness dos Recordes dedicados aos jogos eletrônicos.
-        </p>
-        
-        <div class="guinness-grid">
-            <!-- Recorde 1 -->
-            <div class="record-card">
-                <span class="record-year">2024</span>
-                <div class="record-title">Maior coleção de consoles conectados</div>
-                <div class="record-desc">Ibrahim Al-Nasser (Arábia Saud
+        <div class="how-it-works
