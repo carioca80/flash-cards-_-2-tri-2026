@@ -3,147 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GG ou Fake? Curiosidades Gamer</title>
+    <title>GG ou Fake? | O Portal das Curiosidades Gamer</title>
     <style>
-        /* Reset básico */
+        /* --- Variáveis de Cores e Reset --- */
+        :root {
+            --bg-dark: #0f0e17;
+            --bg-card: #232230;
+            --primary: #ff8906; /* Laranja Neon */
+            --secondary: #f25f4c; /* Coral */
+            --accent: #e53170; /* Rosa Vibrante */
+            --text-main: #fffffe;
+            --text-muted: #a7a9be;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: var(--font-main);
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #1a1a2e;
-            color: #fff;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             line-height: 1.6;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* Cabeçalho */
-        header.cabecalho {
-            background-color: #16213e;
-            padding: 1rem 2rem;
+        /* --- Cabeçalho e Navegação --- */
+        header {
+            background-color: rgba(15, 14, 23, 0.95);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--accent);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 3px solid #e94560;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            backdrop-filter: blur(10px);
         }
 
-        header h1 {
-            color: #e94560;
+        .logo {
             font-size: 1.8rem;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 2px 2px 0px #000;
+            color: var(--text-main);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
         }
 
         nav a {
-            color: #fff;
+            color: var(--text-main);
             text-decoration: none;
-            margin-left: 20px;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 1rem;
             transition: color 0.3s;
-            padding: 5px 10px;
-            border-radius: 5px;
+            position: relative;
         }
 
         nav a:hover {
-            color: #1a1a2e;
-            background-color: #e94560;
+            color: var(--primary);
         }
 
-        /* Conteúdo Principal */
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* --- Hero Section (Intro) --- */
+        .hero {
             text-align: center;
-            flex: 1; /* Empurra o rodapé para baixo se houver pouco conteúdo */
+            padding: 80px 20px;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #1a1a2e 100%);
         }
 
-        h2 {
-            margin-bottom: 40px;
-            font-size: 2rem;
-            color: #f0f0f0;
-            text-shadow: 1px 1px 2px #000;
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        h2 span {
-            color: #e94560;
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 30px;
         }
 
-        /* Grid de Cartões */
-        .container-cartoes {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 20px 0;
-        }
-
-        /* Estrutura do Cartão (Flip Effect) */
-        .cartao {
-            background-color: transparent;
-            perspective: 1000px;
-            height: 380px; /* Altura ajustada para mais texto */
+        .btn-cta {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
             cursor: pointer;
         }
 
-        .cartao-interno {
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(229, 49, 112, 0.4);
+        }
+
+        /* --- Seções Gerais --- */
+        section {
+            padding: 60px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- Como Funciona --- */
+        .how-it-works {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            text-align: center;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .step h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* --- Guinness World Records Section --- */
+        .guinness-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .record-card {
+            background: linear-gradient(145deg, #2a2a35, #1e1e25);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .record-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .record-year {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .record-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .record-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .record-game {
+            margin-top: 15px;
+            font-weight: bold;
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        /* --- Flashcards (Curiosidades) --- */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            perspective: 1000px;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 380px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
             position: relative;
             width: 100%;
             height: 100%;
             text-align: center;
             transition: transform 0.8s;
             transform-style: preserve-3d;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-            border-radius: 15px;
+            box-shadow: var(--shadow);
+            border-radius: 20px;
         }
 
-        .cartao:hover .cartao-interno {
+        .flip-card:hover .flip-card-inner {
             transform: rotateY(180deg);
         }
 
-        /* Frente e Verso comuns */
-        .cartao-frente, .cartao-verso {
+        .flip-card-front, .flip-card-back {
             position: absolute;
             width: 100%;
             height: 100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            border-radius: 15px;
+            border-radius: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 25px;
-            overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255,255,255,0.1);
         }
 
-        /* Estilo da Frente */
-        .cartao-frente {
-            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+        /* Frente */
+        .flip-card-front {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
             color: white;
         }
 
-        .cartao-frente::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at center, rgba(233, 69, 96, 0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .game-icon {
+        .game-emoji {
             font-size: 4rem;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 15px rgba(233, 69, 96, 0.6));
+            filter: drop-shadow(0 0 10px var(--accent));
             animation: float 3s ease-in-out infinite;
         }
 
@@ -152,221 +305,149 @@
             50% { transform: translateY(-10px); }
         }
 
-        .tag {
-            background: rgba(233, 69, 96, 0.2);
-            border: 1px solid #e94560;
+        .question-tag {
+            background: rgba(255, 137, 6, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--primary);
             padding: 5px 15px;
             border-radius: 20px;
-            font-size: 0.85rem;
-            margin-bottom: 15px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #e94560;
+            font-size: 0.8rem;
             font-weight: bold;
+            margin-bottom: 15px;
         }
 
-        .mito {
-            font-size: 1.15rem;
+        .question-text {
+            font-size: 1.2rem;
             font-weight: bold;
-            color: #fff;
             line-height: 1.4;
         }
 
-        /* Estilo do Verso */
-        .cartao-verso {
-            background: linear-gradient(135deg, #e94560 0%, #c02744 100%);
+        /* Verso */
+        .flip-card-back {
+            background: linear-gradient(135deg, var(--accent) 0%, #c02744 100%);
             color: white;
             transform: rotateY(180deg);
         }
 
-        .tag-verdade {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid #fff;
-            color: #fff;
+        .answer-tag {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid white;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
         }
 
-        .verdade {
-            font-size: 1.05rem;
-            font-weight: 500;
+        .answer-text {
+            font-size: 1.1rem;
             line-height: 1.5;
         }
 
-        .verdade strong {
-            color: #ffeb3b; /* Amarelo para destaque */
+        .answer-text strong {
+            color: #fff;
+            background: rgba(255,255,255,0.2);
+            padding: 0 5px;
+            border-radius: 4px;
         }
 
-        /* Rodapé */
+        /* --- Rodapé --- */
         footer {
-            background-color: #16213e;
-            text-align: center;
-            padding: 30px 20px;
+            background-color: #0a0a10;
+            padding: 50px 20px;
             margin-top: auto;
-            border-top: 3px solid #e94560;
-            color: #aaa;
-            font-size: 0.95rem;
+            border-top: 2px solid var(--accent);
+            text-align: center;
         }
 
-        footer p {
-            margin-bottom: 5px;
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        footer .credits {
-            color: #e94560;
+        .footer-logo {
+            font-size: 1.5rem;
             font-weight: bold;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .footer-logo span { color: var(--accent); }
+
+        .credits {
+            margin-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .credits strong {
+            color: var(--primary);
             font-size: 1.1rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            nav { display: none; } /* Em um site real, adicionar menu hambúrguer */
+            .cards-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <header class="cabecalho">
-        <h1>GG ou Fake?</h1>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">GG <span>ou Fake?</span></div>
         <nav>
-            <a href="#">Início</a>
-            <a href="#">Placar</a>
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#como-funciona">Como Funciona</a></li>
+                <li><a href="#guinness">Recordes Guinness</a></li>
+                <li><a href="#curiosidades">Curiosidades</a></li>
+            </ul>
         </nav>
     </header>
 
-    <main>
-        <h2>Mitos do Mundo Gamer: <span>Passe o mouse</span> para revelar a verdade!</h2>
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <h1>Mitos, Lendas e Fatos do Mundo Gamer</h1>
+        <p>Você consegue distinguir o que é verdade do que é lenda urbana? Teste seus conhecimentos e descubra os segredos por trás dos maiores jogos da história.</p>
+        <a href="#curiosidades" class="btn-cta">Começar Desafio</a>
+    </section>
+
+    <!-- Como Funciona -->
+    <section id="como-funciona">
+        <h2 class="section-title">Como Funciona?</h2>
+        <div class="how-it-works">
+            <div class="step">
+                <div class="step-icon">🤔</div>
+                <h3>1. Leia o Mito</h3>
+                <p>Cada cartão apresenta uma afirmação comum sobre jogos que você pode ter ouvido por aí.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">🖱️</div>
+                <h3>2. Passe o Mouse</h3>
+                <p>Interaja com os cartões! Passe o mouse (ou toque no celular) para girar a carta.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">✅</div>
+                <h3>3. Revele a Verdade</h3>
+                <p>Descubra se é "GG" (Verdade) ou "Fake" (Mito) e leia o fato histórico real.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guinness World Records Section -->
+    <section id="guinness">
+        <h2 class="section-title">🏆 Salão da Fama: Guinness World Records</h2>
+        <p style="text-align: center; margin-bottom: 40px; color: var(--text-muted);">
+            Confira alguns dos maiores recordes oficialmente certificados no Livro Guinness dos Recordes dedicados aos jogos eletrônicos.
+        </p>
         
-        <section class="container-cartoes">
-            
-            <!-- Cartão 1: Minecraft -->
-            <article class="cartao">
-                <div class="cartao-interno">
-                    <div class="cartao-frente">
-                        <div class="game-icon">⛏️</div>
-                        <span class="tag">Mito Comum</span>
-                        <p class="mito">"O Minecraft foi criado por uma equipe de 500 desenvolvedores!"</p>
-                    </div>
-                    <div class="cartao-verso">
-                        <div class="game-icon">👨‍💻</div>
-                        <span class="tag tag-verdade">Verdade</span>
-                        <p class="verdade">Markus "Notch" Persson criou a primeira versão sozinho em apenas <strong>6 dias</strong> em 2009!</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Cartão 2: Mario Bros -->
-            <article class="cartao">
-                <div class="cartao-interno">
-                    <div class="cartao-frente">
-                        <div class="game-icon">🍄</div>
-                        <span class="tag">Mito Clássico</span>
-                        <p class="mito">"Mario quebra os blocos batendo a cabeça neles!"</p>
-                    </div>
-                    <div class="cartao-verso">
-                        <div class="game-icon">🥊</div>
-                        <span class="tag tag-verdade">Verdade</span>
-                        <p class="verdade">A arte oficial mostra que ele usa o <strong>punho</strong> para quebrar os blocos!</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Cartão 3: Pac-Man -->
-            <article class="cartao">
-                <div class="cartao-interno">
-                    <div class="cartao-frente">
-                        <div class="game-icon">👻</div>
-                        <span class="tag">Mito</span>
-                        <p class="mito">"O nome Pac-Man vem de 'Puck Man' (o puck do hóquei)!"</p>
-                    </div>
-                    <div class="cartao-verso">
-                        <div class="game-icon">🍕</div>
-                        <span class="tag tag-verdade">Verdade</span>
-                        <p class="verdade">Vem da palavra japonesa <em>"Paku-Paku"</em>, que descreve o som de mastigar aberturas!</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Cartão 4: GTA -->
-            <article class="cartao">
-                <div class="cartao-interno">
-                    <div class="cartao-frente">
-                        <div class="game-icon">🚓</div>
-                        <span class="tag">Mito</span>
-                        <p class="mito">"GTA é baseado apenas em Los Angeles!"</p>
-                    </div>
-                    <div class="cartao-verso">
-                        <div class="game-icon">🌆</div>
-                        <span class="tag tag-verdade">Verdade</span>
-                        <p class="verdade">Los Santos (GTA V) é uma mistura de <strong>Los Angeles com San Francisco</strong> (Vice City é Miami)!</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Cartão 5: Sonic -->
-            <article class="cartao">
-                <div class="cartao-interno">
-                    <div class="cartao-frente">
-                        <div class="game-icon">⚡</div>
-                        <span class="tag">Mito</span>
-                        <p class="mito">"Sonic foi criado para ser mais rápido que o Mario!"</p>
-                    </div>
-                    <div class="cartao-verso">
-                        <div class="game-icon">🦔</div>
-                        <span class="tag tag-verdade">Verdade</span>
-                        <p class="verdade">Ele foi criado para ser a **mascote da Sega** e ter uma atitude "cool" contra o Mario!</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Cartão 6: Tetris -->
-            <article class="cartao">
-                <div class="cartao-interno">
-                    <div class="cartao-frente">
-                        <div class="game-icon">🧱</div>
-                        <span class="tag">Mito</span>
-                        <p class="mito">"Tetris foi criado nos Estados Unidos!"</p>
-                    </div>
-                    <div class="cartao-verso">
-                        <div class="game-icon">🇷🇺</div>
-                        <span class="tag tag-verdade">Verdade</span>
-                        <p class="verdade">Foi criado por Alexey Pajitnov na **União Soviética** em 1984, no centro de computação!</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Cartão 7: The Last of Us -->
-            <article class="cartao">
-                <div class="cartao-interno">
-                    <div class="cartao-frente">
-                        <div class="game-icon">🍄</div>
-                        <span class="tag">Mito</span>
-                        <p class="mito">"Os infectados são apenas zumbis comuns!"</p>
-                    </div>
-                    <div class="cartao-verso">
-                        <div class="game-icon">🦠</div>
-                        <span class="tag tag-verdade">Verdade</span>
-                        <p class="verdade">Eles são baseados no **fungo Cordyceps**, que existe na natureza e controla insetos!</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Cartão 8: Pokemon -->
-            <article class="cartao">
-                <div class="cartao-interno">
-                    <div class="cartao-frente">
-                        <div class="game-icon">🔴</div>
-                        <span class="tag">Mito</span>
-                        <p class="mito">"Pikachu foi o primeiro Pokémon escolhido!"</p>
-                    </div>
-                    <div class="cartao-verso">
-                        <div class="game-icon">🐭</div>
-                        <span class="tag tag-verdade">Verdade</span>
-                        <p class="verdade">O designer preferia o **Eevee** ou o **Gengar**, mas Pikachu foi escolhido por ser mais fofo!</p>
-                    </div>
-                </div>
-            </article>
-
-        </section>
-    </main>
-
-    <footer>
-        <p>Desenvolvido com 💜 por <span class="credits">Ismael</span></p>
-        <p>&copy; 2026 GG ou Fake? - Todos os direitos reservados</p>
-    </footer>
-    
-</body>
-</html>
+        <div class="guinness-grid">
+            <!-- Recorde 1 -->
+            <div class="record-card">
+                <span class="record-year">2024</span>
+                <div class="record-title">Maior coleção de consoles conectados</div>
+                <div class="record-desc">Ibrahim Al-Nasser (Arábia Saud
