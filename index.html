@@ -4,414 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GG ou Fake? | O Portal das Curiosidades Gamer</title>
-    <style>
-        /* --- Variáveis e Reset --- */
-        :root {
-            --bg-dark: #0f0e17;
-            --bg-card: #232230;
-            --primary: #ff8906; /* Laranja Neon */
-            --secondary: #f25f4c; /* Coral */
-            --accent: #e53170; /* Rosa Vibrante */
-            --text-main: #fffffe;
-            --text-muted: #a7a9be;
-            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            --shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: var(--font-main);
-            scroll-behavior: smooth; /* Rolagem suave nativa */
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* --- Cabeçalho --- */
-        header {
-            background-color: rgba(15, 14, 23, 0.95);
-            padding: 1rem 5%;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 2px solid var(--accent);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-main);
-            cursor: pointer;
-        }
-
-        .logo span { color: var(--accent); }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-
-        nav a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: color 0.3s;
-            position: relative;
-            cursor: pointer;
-        }
-
-        nav a:hover { color: var(--primary); }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary);
-            transition: width 0.3s;
-        }
-
-        nav a:hover::after { width: 100%; }
-
-        /* --- Hero Section --- */
-        .hero {
-            text-align: center;
-            padding: 100px 20px;
-            background: linear-gradient(180deg, var(--bg-dark) 0%, #1a1a2e 100%);
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(229, 49, 112, 0.3);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 40px;
-        }
-
-        .btn-cta {
-            display: inline-block;
-            padding: 15px 40px;
-            background-color: var(--accent);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(229, 49, 112, 0.4);
-        }
-
-        .btn-cta:hover {
-            transform: translateY(-3px);
-            background-color: #ff4d94;
-            box-shadow: 0 10px 25px rgba(229, 49, 112, 0.6);
-        }
-
-        /* --- Seções Gerais --- */
-        section {
-            padding: 80px 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--text-main);
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background-color: var(--primary);
-            margin: 15px auto 0;
-            border-radius: 2px;
-        }
-
-        /* --- Como Funciona --- */
-        .how-it-works {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        .step {
-            flex: 1;
-            min-width: 280px;
-            background: var(--bg-card);
-            padding: 40px 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-
-        .step:hover { transform: translateY(-10px); }
-
-        .step-icon { font-size: 3.5rem; margin-bottom: 20px; }
-        .step h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.4rem; }
-        .step p { color: var(--text-muted); }
-
-        /* --- Guinness Grid --- */
-        .guinness-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .record-card {
-            background: linear-gradient(145deg, #2a2a35, #1e1e25);
-            padding: 30px;
-            border-radius: 15px;
-            border-left: 5px solid var(--primary);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .record-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-
-        .record-year {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 137, 6, 0.15);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: var(--primary);
-            border: 1px solid rgba(255, 137, 6, 0.3);
-        }
-
-        .record-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 12px;
-            color: var(--text-main);
-            line-height: 1.3;
-        }
-
-        .record-desc {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-bottom: 15px;
-        }
-
-        .record-game {
-            display: inline-block;
-            background: rgba(229, 49, 112, 0.2);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-weight: bold;
-            color: var(--accent);
-            font-size: 0.9rem;
-        }
-
-        /* --- Flashcards (Curiosidades) --- */
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            perspective: 1000px;
-            margin-top: 20px;
-        }
-
-        .flip-card {
-            background-color: transparent;
-            width: 100%;
-            height: 400px; /* Altura fixa */
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efeito elástico */
-            transform-style: preserve-3d;
-            box-shadow: var(--shadow);
-            border-radius: 20px;
-        }
-
-        /* Classe para ativar o giro via JS (mobile) ou hover (desktop) */
-        .flip-card.is-flipped .flip-card-inner,
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
-            border: 2px solid rgba(255,255,255,0.1);
-            user-select: none;
-        }
-
-        /* Frente */
-        .flip-card-front {
-            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
-            color: white;
-        }
-
-        .game-emoji {
-            font-size: 4.5rem;
-            margin-bottom: 25px;
-            filter: drop-shadow(0 0 15px var(--accent));
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .question-tag {
-            background: rgba(255, 137, 6, 0.15);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 6px 18px;
-            border-radius: 25px;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-        }
-
-        .question-text {
-            font-size: 1.3rem;
-            font-weight: bold;
-            line-height: 1.4;
-        }
-
-        /* Verso */
-        .flip-card-back {
-            background: linear-gradient(135deg, var(--accent) 0%, #9c1c36 100%);
-            color: white;
-            transform: rotateY(180deg);
-        }
-
-        .answer-tag {
-            background: rgba(255,255,255,0.25);
-            border: 1px solid white;
-            color: white;
-            padding: 6px 18px;
-            border-radius: 25px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-        }
-
-        .answer-text {
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        .answer-text strong {
-            color: #fff;
-            background: rgba(255,255,255,0.2);
-            padding: 0 6px;
-            border-radius: 4px;
-            font-weight: 800;
-        }
-
-        /* --- Rodapé --- */
-        footer {
-            background-color: #0a0a10;
-            padding: 60px 20px;
-            margin-top: auto;
-            border-top: 2px solid var(--accent);
-            text-align: center;
-        }
-
-        .footer-logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--text-main);
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-
-        .footer-logo span { color: var(--accent); }
-
-        .credits {
-            margin-top: 25px;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 25px;
-            display: inline-block;
-        }
-
-        .credits strong {
-            color: var(--primary);
-            font-size: 1.1rem;
-            font-weight: 800;
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1rem; }
-            nav { display: none; } /* Menu simplificado para mobile */
-            .cards-container { grid-template-columns: 1fr; }
-            .step { min-width: 100%; }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- Cabeçalho -->
     <header>
         <div class="logo" onclick="window.scrollTo(0,0)">GG <span>ou Fake?</span></div>
         <nav>
@@ -424,14 +20,117 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section id="inicio" class="hero">
         <h1>Mitos, Lendas e Fatos do Mundo Gamer</h1>
         <p>Você consegue distinguir o que é verdade do que é lenda urbana? Teste seus conhecimentos e descubra os segredos por trás dos maiores jogos da história.</p>
         <a href="#curiosidades" class="btn-cta">Começar Desafio</a>
     </section>
 
-    <!-- Como Funciona -->
     <section id="como-funciona">
         <h2 class="section-title">Como Funciona?</h2>
-        <div class="how-it-workdw
+        <div class="how-it-works">
+            <div class="step">
+                <div class="step-icon">💡</div>
+                <h3>1. Escolha a Carta</h3>
+                <p>Navegue pelas curiosidades e leia o mistério na frente do flashcard.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">🔄</div>
+                <h3>2. Vire a Carta</h3>
+                <p>Passe o mouse ou toque na carta para revelar se a afirmação é Fato ou Fake.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">🏆</div>
+                <h3>3. Aprenda e Compartilhe</h3>
+                <p>Descubra a história por trás dos maiores segredos do mundo dos games!</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="guinness">
+        <h2 class="section-title">Recordes do Guinness</h2>
+        <div class="guinness-grid">
+            <div class="record-card">
+                <span class="record-year">2013</span>
+                <div class="record-title">Entretenimento mais lucrativo em 24h</div>
+                <div class="record-desc">Arrecadou $815 milhões no primeiro dia de lançamento.</div>
+                <span class="record-game">GTA V</span>
+            </div>
+            <div class="record-card">
+                <span class="record-year">2011</span>
+                <div class="record-title">Maior tempo jogando um jogo sem parar</div>
+                <div class="record-desc">O recorde ultrapassou 135 horas consecutivas de gameplay.</div>
+                <span class="record-game">Maratona Gamer</span>
+            </div>
+            <div class="record-card">
+                <span class="record-year">2019</span>
+                <div class="record-title">Jogo mais vendido da história</div>
+                <div class="record-desc">Ultrapassou mais de 300 milhões de cópias vendidas mundialmente.</div>
+                <span class="record-game">Minecraft</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="curiosidades">
+        <h2 class="section-title">Curiosidades Gamer</h2>
+        <div class="cards-container">
+
+            <div class="flip-card" tabindex="0">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="game-emoji">🍄</div>
+                        <span class="question-tag">GG ou Fake?</span>
+                        <p class="question-text">O Mario quebra os blocos no Super Mario Bros. usando a cabeça?</p>
+                        <span class="hint-text">Clique ou toque para revelar</span>
+                    </div>
+                    <div class="flip-card-back">
+                        <span class="answer-tag">É FAKE! ❌</span>
+                        <p class="answer-text">Mario na verdade usa o <strong>punho levantado</strong> para quebrar os blocos, e não a cabeça!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" tabindex="0">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="game-emoji">👻</div>
+                        <span class="question-tag">GG ou Fake?</span>
+                        <p class="question-text">Os fantasmas de Pac-Man possuem personalidades e comportamentos diferentes?</p>
+                        <span class="hint-text">Clique ou toque para revelar</span>
+                    </div>
+                    <div class="flip-card-back">
+                        <span class="answer-tag">É GG! (VERDADE) ✅</span>
+                        <p class="answer-text"><strong>Blinky</strong> persegue, <strong>Pinky</strong> se posiciona na frente, <strong>Inky</strong> tenta flanquear e <strong>Clyde</strong> se move de forma aleatória!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" tabindex="0">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="game-emoji">🎮</div>
+                        <span class="question-tag">GG ou Fake?</span>
+                        <p class="question-text">Assoprar a fita de videogame realmente limpava a poeira e corrigia o jogo?</p>
+                        <span class="hint-text">Clique ou toque para revelar</span>
+                    </div>
+                    <div class="flip-card-back">
+                        <span class="answer-tag">É FAKE! ❌</span>
+                        <p class="answer-text">A umidade do sopro corroía os pinos de metal. Apenas tirar e colocar o cartucho de novo resolvia o mau contato.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">GG <span>ou Fake?</span></div>
+        <p>Desvendando os segredos do mundo gamer um card por vez.</p>
+        <div class="credits">
+            Desenvolvido por <strong>Seu Nome</strong>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,149 +1,426 @@
+/* --- Variáveis e Reset --- */
+:root {
+    --bg-dark: #0f0e17;
+    --bg-card: #232230;
+    --primary: #ff8906; /* Laranja Neon */
+    --secondary: #f25f4c; /* Coral */
+    --accent: #e53170; /* Rosa Vibrante */
+    --text-main: #fffffe;
+    --text-muted: #a7a9be;
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Evita que padding quebre o tamanho dos elementos */
+    box-sizing: border-box;
+    font-family: var(--font-main);
+    scroll-behavior: smooth;
 }
 
 body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #0b0c10; /* Fundo "Dark Mode" Gamer */
-    font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
 /* --- Cabeçalho --- */
-.cabecalho {
-    padding: 15px 25px;
+header {
+    background-color: rgba(15, 14, 23, 0.95);
+    padding: 1rem 5%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--accent);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1f2833; /* Cinza azulado tecnológico */
-    border-bottom: 3px solid #66fcf1; /* Detalhe em ciano neon */
+    backdrop-filter: blur(10px);
 }
 
-h1 {
-    color: #66fcf1; /* Texto em ciano neon */
-    font-size: 24px;
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    color: var(--text-main);
+    cursor: pointer;
 }
 
-.cabecalho-link {
-    color: #fff;
+.logo span {
+    color: var(--accent);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+nav a {
+    color: var(--text-main);
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 1rem;
     transition: color 0.3s;
+    position: relative;
+    cursor: pointer;
 }
 
-.cabecalho-link:hover {
-    color: #66fcf1;
+nav a:hover {
+    color: var(--primary);
 }
 
-/* --- Conteúdo Principal --- */
-main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary);
+    transition: width 0.3s;
 }
 
-h2 {
-    color: #fff;
-    margin-bottom: 30px;
+nav a:hover::after {
+    width: 100%;
+}
+
+/* --- Hero Section --- */
+.hero {
     text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(180deg, var(--bg-dark) 0%, #1a1a2e 100%);
 }
 
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(229, 49, 112, 0.3);
+}
+
+.hero p {
+    font-size: 1.3rem;
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto 40px;
+}
+
+.btn-cta {
+    display: inline-block;
+    padding: 15px 40px;
+    background-color: var(--accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(229, 49, 112, 0.4);
+}
+
+.btn-cta:hover {
+    transform: translateY(-3px);
+    background-color: #ff4d94;
+    box-shadow: 0 10px 25px rgba(229, 49, 112, 0.6);
+}
+
+/* --- Seções Gerais --- */
 section {
+    padding: 80px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+    position: relative;
+    color: var(--text-main);
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary);
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+/* --- Como Funciona --- */
+.how-it-works {
     display: flex;
-    gap: 24px;
-    flex-wrap: wrap; /* Permite que os cards quebrem de linha em telas menores */
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 30px;
 }
 
-/* --- Mecânica de Flashcard 3D --- */
-.cartao {
-    width: 280px;
-    height: 380px; /* Aumentado para acomodar imagem + texto sem transbordar */
-    perspective: 1000px; /* Crucial para o efeito de profundidade 3D do flashcard */
+.step {
+    flex: 1;
+    min-width: 280px;
+    background: var(--bg-card);
+    padding: 40px 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    transition: transform 0.3s;
 }
 
-.cartao-interno {
+.step:hover {
+    transform: translateY(-10px);
+}
+
+.step-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.step h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.step p {
+    color: var(--text-muted);
+}
+
+/* --- Guinness Grid --- */
+.guinness-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.record-card {
+    background: linear-gradient(145deg, #2a2a35, #1e1e25);
+    padding: 30px;
+    border-radius: 15px;
+    border-left: 5px solid var(--primary);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.record-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.record-year {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 137, 6, 0.15);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--primary);
+    border: 1px solid rgba(255, 137, 6, 0.3);
+}
+
+.record-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: var(--text-main);
+    line-height: 1.3;
+}
+
+.record-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+}
+
+.record-game {
+    display: inline-block;
+    background: rgba(229, 49, 112, 0.2);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    color: var(--accent);
+    font-size: 0.9rem;
+}
+
+/* --- Flashcards (Curiosidades) --- */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    perspective: 1000px;
+    margin-top: 20px;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 400px;
+    cursor: pointer;
+    outline: none;
+}
+
+.flip-card-inner {
+    position: relative;
     width: 100%;
     height: 100%;
-    position: relative;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Transição mais suave */
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform-style: preserve-3d;
+    box-shadow: var(--shadow);
+    border-radius: 20px;
 }
 
-.cartao:hover .cartao-interno {
+.flip-card.is-flipped .flip-card-inner {
     transform: rotateY(180deg);
 }
 
-.cartao-frente, .cartao-verso {
+.flip-card-front, .flip-card-back {
+    position: absolute;
     width: 100%;
     height: 100%;
-    position: absolute; /* Sobrepõe perfeitamente a frente e o verso */
-    top: 0;
-    left: 0;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-    backface-visibility: hidden; /* Esconde o texto invertido atrás do card */
-    background-color: #1f2833;
-    border: 2px solid #45a29e;
-    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
-}
-
-.cartao-verso {
-    transform: rotateY(180deg); /* Define a orientação inicial do verso */
-    background-color: #0b0c10;
-    border-color: #66fcf1; /* Borda neon diferente para o verso */
-}
-
-/* --- Conteúdo Interno dos Flashcards --- */
-.cartao-imagem {
-    width: 100%;
-    height: 180px;
-    object-fit: cover; /* Garante que a imagem se ajuste sem distorcer */
-    border-bottom: 2px solid #45a29e;
-}
-
-.cartao-verso .cartao-imagem {
-    border-bottom: 2px solid #66fcf1;
-}
-
-p {
-    padding: 20px;
-    font-size: 16px;
-    line-height: 1.5;
-    text-align: center;
-    color: #c5c6c7;
-    flex: 1;
-    display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    padding: 30px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    user-select: none;
 }
 
-/* Classes específicas para os textos do HTML anterior */
-.mito {
-    color: #ff4d4d; /* Vermelho vibrante para o mito */
-    font-weight: bold;
+/* Frente */
+.flip-card-front {
+    background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+    color: white;
 }
 
-.verdade {
-    color: #2ecc71; /* Verde vibrante para a verdade */
+.game-emoji {
+    font-size: 4.5rem;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 0 15px var(--accent));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.question-tag {
+    background: rgba(255, 137, 6, 0.15);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 6px 18px;
+    border-radius: 25px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.question-text {
+    font-size: 1.2rem;
     font-weight: bold;
+    line-height: 1.4;
+}
+
+.hint-text {
+    margin-top: 15px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* Verso */
+.flip-card-back {
+    background: linear-gradient(135deg, var(--accent) 0%, #9c1c36 100%);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+.answer-tag {
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid white;
+    color: white;
+    padding: 6px 18px;
+    border-radius: 25px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.answer-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.answer-text strong {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0 6px;
+    border-radius: 4px;
+    font-weight: 800;
 }
 
 /* --- Rodapé --- */
 footer {
-    background-color: #1f2833;
-    padding: 15px 25px;
-    color: #c5c6c7;
+    background-color: #0a0a10;
+    padding: 60px 20px;
+    margin-top: auto;
+    border-top: 2px solid var(--accent);
     text-align: center;
-    font-size: 14px;
-    border-top: 1px solid #45a29e;
+}
+
+.footer-logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.footer-logo span {
+    color: var(--accent);
+}
+
+.credits {
+    margin-top: 25px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 25px;
+    display: inline-block;
+}
+
+.credits strong {
+    color: var(--primary);
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 1rem; }
+    nav ul { gap: 15px; font-size: 0.9rem; }
+    .cards-container { grid-template-columns: 1fr; }
+    .step { min-width: 100%; }
 }
